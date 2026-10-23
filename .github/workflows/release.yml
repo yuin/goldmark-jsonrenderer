@@ -5,6 +5,13 @@ on:
     tags:
       - "v*"
 
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release tag to build (e.g. v1.2.3)"
+        required: true
+        type: string
+
 permissions:
   contents: write
 
@@ -51,7 +58,7 @@ jobs:
 
           mkdir -p dist
 
-          BINARY="cli_${VERSION}_${GOOS}_${GOARCH}"
+          BINARY="markdown2json_${VERSION}_${GOOS}_${GOARCH}"
           if [ "$GOOS" = "windows" ]; then
             BINARY="${BINARY}.exe"
           fi
@@ -60,7 +67,7 @@ jobs:
             -trimpath \
             -ldflags="-s -w" \
             -o "dist/${BINARY}" \
-            ./cmd/cli
+            ./cmd/markdown2json
 
       - name: Package binary
         shell: bash
@@ -71,7 +78,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          BINARY="cli_${VERSION}_${GOOS}_${GOARCH}"
+          BINARY="markdown2json_${VERSION}_${GOOS}_${GOARCH}"
           if [ "$GOOS" = "windows" ]; then
             BINARY="${BINARY}.exe"
             (
