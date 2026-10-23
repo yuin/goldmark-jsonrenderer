@@ -89,6 +89,7 @@ func addAttributes(data map[string]any, source []byte, node ast.Node) {
 		attrs[string(attr.Name)] = attr.Value.Value(source)
 	}
 	data["attributes"] = attrs
+	data["pos"] = node.Pos()
 }
 
 // AsMap returns a NodeRenderer that renders AST nodes as JSON using the given map m.

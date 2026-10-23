@@ -14,23 +14,26 @@ have a `children` array.
 
 ```json
 {
-  "kind": "document",
-  "attributes": {},
-  "metadata": {},
-  "children": [
-    {
-      "kind": "heading",
-      "attributes": {},
-      "level": 1,
-      "children": [
+    "attributes": {},
+    "children": [
         {
-          "kind": "text",
-          "attributes": {},
-          "value": "Heading 1"
+            "attributes": {},
+            "children": [
+                {
+                    "attributes": {},
+                    "kind": "text",
+                    "pos": 2,
+                    "value": "Heading1"
+                }
+            ],
+            "kind": "heading",
+            "level": 1,
+            "pos": 0
         }
-      ]
-    }
-  ]
+    ],
+    "kind": "document",
+    "metadata": {},
+    "pos": 0
 }
 ```
 
@@ -40,6 +43,7 @@ have a `children` array.
 |----------|------|-------------|
 | `kind` | string | A string indicating the type of the element. |
 | `attributes` | object | Attributes associated with the element. Attribute names and values are strings. It is `{}` when the element has no attributes. |
+| `pos` | number | The zero-based byte offset of the element in the original Markdown source.  |
 | `children` | array | Child elements. This property is present only on elements that can have children. |
 
 ## Elements
@@ -57,8 +61,9 @@ children.
 {
   "kind": "document",
   "attributes": {},
+  "pos": 0,
   "metadata": {
-    "title": "Example"
+  "title": "Example"
   },
   "children": []
 }
@@ -80,6 +85,7 @@ Represents an ATX or setext heading.
 {
   "kind": "heading",
   "attributes": {},
+  "pos": 0,
   "level": 1,
   "children": []
 }
@@ -101,6 +107,7 @@ Represents a block quote.
 {
   "kind": "blockquote",
   "attributes": {},
+  "pos": 0,
   "children": []
 }
 ```
@@ -117,6 +124,7 @@ Represents an indented or fenced code block.
 {
   "kind": "codeBlock",
   "attributes": {},
+  "pos": 0,
   "codeBlockKind": "Fenced",
   "info": "go example",
   "language": "go",
@@ -143,6 +151,7 @@ Represents a block HTML element.
 {
   "kind": "htmlBlock",
   "attributes": {},
+  "pos": 0,
   "htmlBlockKind": "Kind6",
   "value": "<div>block HTML</div>\n"
 }
@@ -165,15 +174,17 @@ Represents an ordered or unordered list.
 {
   "kind": "list",
   "attributes": {},
+  "pos": 0,
   "marker": ".",
   "isTight": true,
   "start": 1,
   "children": [
-    {
-      "kind": "listItem",
-      "attributes": {},
-      "children": []
-    }
+  {
+    "kind": "listItem",
+    "attributes": {},
+    "pos": 0,
+    "children": []
+  }
   ]
 }
 ```
@@ -196,6 +207,7 @@ Represents an item in a list.
 {
   "kind": "listItem",
   "attributes": {},
+  "pos": 0,
   "children": []
 }
 ```
@@ -207,8 +219,9 @@ Task-list items also use `listItem`. Their task status is included in
 {
   "kind": "listItem",
   "attributes": {
-    "task-status": "completed"
+  "task-status": "completed"
   },
+  "pos": 0,
   "children": []
 }
 ```
@@ -228,6 +241,7 @@ Represents a paragraph.
 {
   "kind": "paragraph",
   "attributes": {},
+  "pos": 0,
   "children": []
 }
 ```
@@ -243,7 +257,8 @@ Represents a thematic break.
 ```json
 {
   "kind": "thematicBreak",
-  "attributes": {}
+  "attributes": {},
+  "pos": 0
 }
 ```
 
@@ -259,6 +274,7 @@ Represents a link reference definition.
 {
   "kind": "linkReferenceDefinition",
   "attributes": {},
+  "pos": 0,
   "label": "example",
   "destination": "https://www.example.com",
   "title": "Example title"
@@ -283,6 +299,7 @@ Represents an autolink, including an email autolink.
 {
   "kind": "autoLink",
   "attributes": {},
+  "pos": 0,
   "destination": "https://www.example.com",
   "label": "https://www.example.com",
   "text": "<https://www.example.com>"
@@ -307,6 +324,7 @@ Represents inline code.
 {
   "kind": "codeSpan",
   "attributes": {},
+  "pos": 0,
   "value": "code"
 }
 ```
@@ -327,6 +345,7 @@ Represents emphasized text.
 {
   "kind": "emphasis",
   "attributes": {},
+  "pos": 0,
   "children": []
 }
 ```
@@ -343,6 +362,7 @@ Represents strongly emphasized text.
 {
   "kind": "strong",
   "attributes": {},
+  "pos": 0,
   "children": []
 }
 ```
@@ -359,18 +379,20 @@ Represents an image.
 {
   "kind": "image",
   "attributes": {},
+  "pos": 0,
   "destination": "image.png",
   "title": "Image title",
   "reference": {
-    "referenceLinkKind": "Full",
-    "value": "image-reference"
+  "referenceLinkKind": "Full",
+  "value": "image-reference"
   },
   "children": [
-    {
-      "kind": "text",
-      "attributes": {},
-      "value": "alternative text"
-    }
+  {
+    "kind": "text",
+    "attributes": {},
+    "pos": 0,
+    "value": "alternative text"
+  }
   ]
 }
 ```
@@ -395,18 +417,20 @@ Represents a link.
 {
   "kind": "link",
   "attributes": {},
+  "pos": 0,
   "destination": "https://www.example.com",
   "title": "Example title",
   "reference": {
-    "referenceLinkKind": "Full",
-    "value": "example"
+  "referenceLinkKind": "Full",
+  "value": "example"
   },
   "children": [
-    {
-      "kind": "text",
-      "attributes": {},
-      "value": "label"
-    }
+  {
+    "kind": "text",
+    "attributes": {},
+    "pos": 0,
+    "value": "label"
+  }
   ]
 }
 ```
@@ -431,6 +455,7 @@ Represents an inline raw HTML element.
 {
   "kind": "rawHtml",
   "attributes": {},
+  "pos": 0,
   "value": "<span>"
 }
 ```
@@ -451,6 +476,7 @@ Represents text.
 {
   "kind": "text",
   "attributes": {},
+  "pos": 0,
   "value": "line before a soft break",
   "softLineBreak": true
 }
@@ -477,6 +503,7 @@ Represents a reference to a footnote definition.
 {
   "kind": "footnoteReference",
   "attributes": {},
+  "pos": 0,
   "label": "note",
   "index": 1,
   "refIndex": 0,
@@ -502,6 +529,7 @@ Represents a footnote definition.
 {
   "kind": "footnoteDefinition",
   "attributes": {},
+  "pos": 0,
   "label": "note",
   "children": []
 }
@@ -523,6 +551,7 @@ Represents strikethrough text.
 {
   "kind": "strikethrough",
   "attributes": {},
+  "pos": 0,
   "children": []
 }
 ```
@@ -539,6 +568,7 @@ Represents a table.
 {
   "kind": "table",
   "attributes": {},
+  "pos": 0,
   "children": []
 }
 ```
@@ -555,6 +585,7 @@ Represents the header row of a table.
 {
   "kind": "tableHeader",
   "attributes": {},
+  "pos": 0,
   "children": []
 }
 ```
@@ -571,6 +602,7 @@ Represents the body of a table.
 {
   "kind": "tableBody",
   "attributes": {},
+  "pos": 0,
   "children": []
 }
 ```
@@ -587,6 +619,7 @@ Represents a table row.
 {
   "kind": "tableRow",
   "attributes": {},
+  "pos": 0,
   "children": []
 }
 ```
@@ -603,6 +636,7 @@ Represents a table cell.
 {
   "kind": "tableCell",
   "attributes": {},
+  "pos": 0,
   "align": "center",
   "children": []
 }
@@ -624,6 +658,7 @@ Represents a definition list.
 {
   "kind": "definitionList",
   "attributes": {},
+  "pos": 0,
   "children": []
 }
 ```
@@ -640,6 +675,7 @@ Represents a term in a definition list.
 {
   "kind": "definitionTerm",
   "attributes": {},
+  "pos": 0,
   "children": []
 }
 ```
@@ -656,6 +692,7 @@ Represents a description in a definition list.
 {
   "kind": "definitionDescription",
   "attributes": {},
+  "pos": 0,
   "children": []
 }
 ```
@@ -672,6 +709,7 @@ Represents a GitHub-style alert.
 {
   "kind": "alert",
   "attributes": {},
+  "pos": 0,
   "alertKind": "NOTE",
   "title": "Alert title",
   "children": []
