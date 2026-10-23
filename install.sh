@@ -87,12 +87,14 @@ curl -fL --retry 3 "$URL" -o "${TMP_DIR}/${ARCHIVE}"
 
 tar -xzf "${TMP_DIR}/${ARCHIVE}" -C "$TMP_DIR"
 
-if [[ ! -f "${TMP_DIR}/${BINARY}" ]]; then
-  echo "Error: binary not found in archive: ${BINARY}" >&2
+DOWNLOADED_BINARY="${BINARY}_${VERSION}_${GOOS}_${GOARCH}"
+
+if [[ ! -f "${TMP_DIR}/${DOWNLOADED_BINARY}" ]]; then
+  echo "Error: binary not found in archive: ${DOWNLOADED_BINARY}" >&2
   exit 1
 fi
 
 mkdir -p "$INSTALL_DIR"
-install -m 0755 "${TMP_DIR}/${BINARY}" "${INSTALL_DIR}/${BINARY}"
+install -m 0755 "${TMP_DIR}/${DOWNLOADED_BINARY}" "${INSTALL_DIR}/${BINARY}"
 
 echo "Installed ${BINARY} ${VERSION} to ${INSTALL_DIR}/${BINARY}"
