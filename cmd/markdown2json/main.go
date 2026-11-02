@@ -147,46 +147,46 @@ func main() {
 	var rexts []jsonrenderer.Extension
 	if optExtensions == "all" {
 		pexts = []parser.Extension{
-			extension.GFMParser,
-			extension.FootnoteParser,
-			extension.DefinitionListParser,
-			meta.Parser,
-			alert.Parser,
+			extension.NewGFMParser(),
+			extension.NewFootnoteParser(),
+			extension.NewDefinitionListParser(),
+			meta.NewParser(),
+			alert.NewParser(),
 		}
 		rexts = []jsonrenderer.Extension{
-			jsonrenderer.Footnote,
-			jsonrenderer.Strikethrough,
-			jsonrenderer.Table,
-			jsonrenderer.DefinitionList,
-			jsonrenderer.Alert,
+			jsonrenderer.NewFootnote(),
+			jsonrenderer.NewStrikethrough(),
+			jsonrenderer.NewTable(),
+			jsonrenderer.NewDefinitionList(),
+			jsonrenderer.NewAlert(),
 		}
 	} else {
 		for ext := range strings.SplitSeq(optExtensions, ",") {
 			switch ext {
 			case "gfm":
-				pexts = append(pexts, extension.GFMParser)
-				rexts = append(rexts, jsonrenderer.Strikethrough, jsonrenderer.Table)
+				pexts = append(pexts, extension.NewGFMParser())
+				rexts = append(rexts, jsonrenderer.NewStrikethrough(), jsonrenderer.NewTable())
 			case "linkify":
-				pexts = append(pexts, extension.LinkifyParser)
+				pexts = append(pexts, extension.NewLinkifyParser())
 			case "strikethrough":
-				pexts = append(pexts, extension.StrikethroughParser)
-				rexts = append(rexts, jsonrenderer.Strikethrough)
+				pexts = append(pexts, extension.NewStrikethroughParser())
+				rexts = append(rexts, jsonrenderer.NewStrikethrough())
 			case "table":
-				pexts = append(pexts, extension.TableParser)
-				rexts = append(rexts, jsonrenderer.Table)
+				pexts = append(pexts, extension.NewTableParser())
+				rexts = append(rexts, jsonrenderer.NewTable())
 			case "tasklist":
-				pexts = append(pexts, extension.TaskListItemParser)
+				pexts = append(pexts, extension.NewTaskListItemParser())
 			case "footnote":
-				pexts = append(pexts, extension.FootnoteParser)
-				rexts = append(rexts, jsonrenderer.Footnote)
+				pexts = append(pexts, extension.NewFootnoteParser())
+				rexts = append(rexts, jsonrenderer.NewFootnote())
 			case "definitionList":
-				pexts = append(pexts, extension.DefinitionListParser)
-				rexts = append(rexts, jsonrenderer.DefinitionList)
+				pexts = append(pexts, extension.NewDefinitionListParser())
+				rexts = append(rexts, jsonrenderer.NewDefinitionList())
 			case "meta":
-				pexts = append(pexts, meta.Parser)
+				pexts = append(pexts, meta.NewParser())
 			case "alert":
-				pexts = append(pexts, alert.Parser)
-				rexts = append(rexts, jsonrenderer.Alert)
+				pexts = append(pexts, alert.NewParser())
+				rexts = append(rexts, jsonrenderer.NewAlert())
 			default:
 				fmt.Printf("Unknown extension: %s\n", ext)
 				return
