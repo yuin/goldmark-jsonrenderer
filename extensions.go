@@ -14,9 +14,6 @@ func NewFootnote() Extension {
 	return &footnote{}
 }
 
-// Footnote is a default footnote extension.
-var Footnote = NewFootnote()
-
 func (e *footnote) RendererOptions(_ *Config) []Option {
 	return []Option{
 		WithNodeRenderers(map[ast.NodeKind]NodeRenderer{
@@ -46,9 +43,6 @@ func NewStrikethrough() Extension {
 	return &strikethrough{}
 }
 
-// Strikethrough is a default strikethrough extension.
-var Strikethrough = NewStrikethrough()
-
 func (e *strikethrough) RendererOptions(_ *Config) []Option {
 	return []Option{
 		WithNodeRenderers(map[ast.NodeKind]NodeRenderer{
@@ -64,9 +58,6 @@ type table struct {
 func NewTable() Extension {
 	return &table{}
 }
-
-// Table is a default table extension.
-var Table = NewTable()
 
 func (e *table) RendererOptions(_ *Config) []Option {
 	return []Option{
@@ -93,9 +84,6 @@ func NewDefinitionList() Extension {
 	return &definitionList{}
 }
 
-// DefinitionList is a default definition list extension.
-var DefinitionList = NewDefinitionList()
-
 func (e *definitionList) RendererOptions(_ *Config) []Option {
 	return []Option{
 		WithNodeRenderers(map[ast.NodeKind]NodeRenderer{
@@ -113,9 +101,6 @@ type alertr struct {
 func NewAlert() Extension {
 	return &alertr{}
 }
-
-// Alert is a default alert extension.
-var Alert = NewAlert()
 
 func (e *alertr) RendererOptions(_ *Config) []Option {
 	return []Option{

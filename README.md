@@ -19,8 +19,8 @@ minimum Go version: 1.27
 
 ```go
 func main() {
-    p := parser.New(parser.WithExtensions(extension.GFMParser))
-    r := jsonrenderer.New(jsonrenderer.WithExtensions(jsonrenderer.Strikethrough, jsonrenderer.Table))
+    p := parser.New(parser.WithExtensions(extension.NewGFMParser()))
+    r := jsonrenderer.New(jsonrenderer.WithExtensions(jsonrenderer.NewStrikethrough(), jsonrenderer.NewTable()))
     doc := p.Parse(source)
 
     var w jsonrenderer.JSONWriter
