@@ -61,6 +61,31 @@ func main() {
   markdown2json is a command-line tool that converts Markdown text to JSON representation of 
   its AST (Abstract Syntax Tree). if <input-file> is not specified, the tool will read from 
   standard input.
+
+  JSON representation of the AST is like this:
+
+  {
+    "kind": "document",
+    "metadata": {},
+    "pos": 0,
+    "attributes": {},
+    "children": [
+      {
+        "kind": "heading",
+        "level": 1,
+        "pos": 0,
+        "attributes": {},
+        "children": [
+          {
+            "kind": "text",
+            "pos": 2,
+            "attributes": {},
+            "value": "Heading1"
+          }
+        ]
+      }
+    ]
+  }
 `)
 	usageLines = append(usageLines, "Options:")
 	var optPrettyPrint bool
